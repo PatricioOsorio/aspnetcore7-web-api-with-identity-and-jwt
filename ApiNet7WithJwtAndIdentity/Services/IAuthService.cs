@@ -6,5 +6,6 @@ namespace ApiNet7WithJwtAndIdentity.Services
   {
     Task<bool> RegisterUserAsync(LoginUser loginUser);
     Task<bool> LoginAsync(LoginUser loginUser);
+    string GenerateToken(LoginUser login);
   }
 }

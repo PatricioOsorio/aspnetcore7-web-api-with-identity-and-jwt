@@ -3,7 +3,9 @@ using ApiNet7WithJwtAndIdentity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,9 @@ builder.Services.AddAuthentication(options =>
     ValidateIssuerSigningKey = true,
     ValidIssuer = builder.Configuration.GetSection("JwtSettings:Issuer").Value,
     ValidAudience = builder.Configuration.GetSection("JwtSettings:Audience").Value,
+    IssuerSigningKey = new SymmetricSecurityKey(
+        Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtSettings:Key").Value!)
+    ),
   };
 });
 

@@ -32,9 +32,16 @@ namespace ApiNet7WithJwtAndIdentity.Controllers
     {
       if (!ModelState.IsValid) return BadRequest();
 
-      return await _authService.LoginAsync(loginUser)
-         ? Ok("¡Inicio de sesion correcta!")
-         : BadRequest("Credenciales incorrectas");
+      if (await _authService.LoginAsync(loginUser))
+      {
+        var tokenString = _authService.GenerateToken(loginUser);
+
+        return Ok(tokenString);
+      }
+      else
+      {
+        return BadRequest("Credenciales incorrectas");
+      }
     }
   }
 }
