@@ -1,7 +1,9 @@
 using ApiNet7WithJwtAndIdentity.Context;
 using ApiNet7WithJwtAndIdentity.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,24 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
   .AddEntityFrameworkStores<AuthIdentityDbContext>()
   .AddDefaultTokenProviders();
 
+builder.Services.AddAuthentication(options =>
+{
+  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+  options.TokenValidationParameters = new TokenValidationParameters()
+  {
+    ValidateActor = true,
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    RequireExpirationTime = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = builder.Configuration.GetSection("JwtSettings:Issuer").Value,
+    ValidAudience = builder.Configuration.GetSection("JwtSettings:Audience").Value,
+  };
+});
+
 builder.Services.AddTransient<IAuthService, AuthService>();
 
 // Add services to the container.
@@ -35,6 +55,8 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+app.UseAuthorization();
 
 app.UseAuthorization();
 
