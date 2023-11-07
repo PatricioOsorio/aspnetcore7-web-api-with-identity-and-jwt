@@ -36,7 +36,8 @@ namespace ApiNet7WithJwtAndIdentity.Controllers
       {
         var tokenString = _authService.GenerateToken(loginUser);
 
-        return Ok(tokenString);
+        //return Ok(tokenString);
+        return Ok(new { message = tokenString });
       }
       else
       {
