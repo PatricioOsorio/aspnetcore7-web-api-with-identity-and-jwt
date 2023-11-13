@@ -7,10 +7,12 @@ namespace ApiNet7WithJwtAndIdentity.Models
   public class Corraloneros
   {
     [Key]
-    [ForeignKey(nameof(Usuario))]
+    [Required]
+    [ForeignKey(nameof(Usuarios))]
     public string IdCorralonero { get; set; }
 
     // Propiedad de navegación hacia el modelo Usuarios
     public Usuarios Usuario { get; set; }
+
   }
 }

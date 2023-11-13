@@ -9,22 +9,22 @@ namespace GestionPracticasProfesionalesUtp.Models
 {
   public class Usuarios : IdentityUser
   {
+    [Required]
     [PersonalData]
     [Column(TypeName = "nvarchar(50)")]
     [Display(Name = "Nombre")]
-    [Required]
     public string? Nombre { get; set; }
 
+    [Required]
     [PersonalData]
     [Column(TypeName = "nvarchar(50)")]
     [Display(Name = "Apellido Paterno")]
-    [Required]
     public string? ApellidoPaterno { get; set; }
 
+    [Required]
     [PersonalData]
     [Column(TypeName = "nvarchar(50)")]
     [Display(Name = "Apellido Materno")]
-    [Required]
     public string? ApellidoMaterno { get; set; }
 
     // Agregado: Propiedad de navegación inversa para establecer la relación uno a uno

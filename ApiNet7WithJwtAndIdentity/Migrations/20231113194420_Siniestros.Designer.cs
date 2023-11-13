@@ -4,6 +4,7 @@ using ApiNet7WithJwtAndIdentity.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiNet7WithJwtAndIdentity.Migrations
 {
     [DbContext(typeof(AuthIdentityDbContext))]
-    partial class AuthIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231113194420_Siniestros")]
+    partial class Siniestros
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
