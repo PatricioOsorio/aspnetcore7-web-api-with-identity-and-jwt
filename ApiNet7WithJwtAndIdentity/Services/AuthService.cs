@@ -1,4 +1,5 @@
 ﻿using ApiNet7WithJwtAndIdentity.Models;
+using GestionPracticasProfesionalesUtp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,10 +10,10 @@ namespace ApiNet7WithJwtAndIdentity.Services
 {
   public class AuthService : IAuthService
   {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<Usuarios> _userManager;
     private readonly IConfiguration _configuration;
 
-    public AuthService(UserManager<IdentityUser> userManager, IConfiguration configuration)
+    public AuthService(UserManager<Usuarios> userManager, IConfiguration configuration)
     {
       _userManager = userManager;
       _configuration = configuration;
@@ -20,7 +21,7 @@ namespace ApiNet7WithJwtAndIdentity.Services
 
     public async Task<bool> RegisterUserAsync(LoginUser loginUser)
     {
-      var identityUser = new IdentityUser { UserName = loginUser.UserName, Email = loginUser.UserName };
+      var identityUser = new Usuarios { UserName = loginUser.UserName, Email = loginUser.UserName };
 
       var result = await _userManager.CreateAsync(identityUser, loginUser.Password);
 

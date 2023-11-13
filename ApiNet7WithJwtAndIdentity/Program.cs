@@ -1,5 +1,6 @@
 using ApiNet7WithJwtAndIdentity.Context;
 using ApiNet7WithJwtAndIdentity.Services;
+using GestionPracticasProfesionalesUtp.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,11 @@ builder.Services.AddDbContext<AuthIdentityDbContext>(options =>
 });
 
 // Inyeccion del identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<Usuarios, IdentityRole>(options =>
 {
   options.Password.RequiredLength = 5;
 })
+   .AddRoles<IdentityRole>()
   .AddEntityFrameworkStores<AuthIdentityDbContext>()
   .AddDefaultTokenProviders();
 
