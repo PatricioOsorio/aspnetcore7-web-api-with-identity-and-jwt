@@ -14,5 +14,7 @@ namespace ApiNet7WithJwtAndIdentity.Models
     // Propiedad de navegación hacia el modelo Usuarios
     public Usuarios Usuario { get; set; }
 
+    // Propiedad de navegación inversa para establecer la relación uno a uno con Corralones
+    public Corralones Corralon { get; set; }
   }
 }

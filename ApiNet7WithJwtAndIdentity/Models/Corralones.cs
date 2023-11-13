@@ -21,5 +21,20 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [Column(TypeName = "nvarchar(15)")]
     [Display(Name = "Correo Electrónico")]
     public string? Telefono { get; set; }
+
+    // Relación 1 a 1 con Regiones
+    [ForeignKey(nameof(IdRegion))]
+    public Regiones Region { get; set; }
+    public int IdRegion { get; set; }
+
+    // Relación 1 a 1 con Ubicaciones
+    [ForeignKey(nameof(IdUbicacion))]
+    public Ubicaciones Ubicacion { get; set; }
+    public int IdUbicacion { get; set; }
+
+    // Relación 1 a 1 con Corraloneros
+    [ForeignKey(nameof(IdCorralonero))]
+    public Corraloneros Corralonero { get; set; }
+    public string IdCorralonero { get; set; }
   }
 }

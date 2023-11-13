@@ -15,6 +15,10 @@ namespace ApiNet7WithJwtAndIdentity.Context
     {
       base.OnModelCreating(builder);
 
+      // ==================================
+      // Relaciones de Usuarios
+      // ==================================
+
       //Relación 1 a 1 entre Usuarios y Asesores
       builder.Entity<Asesores>()
        .HasOne(c => c.Usuario)
@@ -27,6 +31,10 @@ namespace ApiNet7WithJwtAndIdentity.Context
         .WithOne(u => u.Corralonero)
         .HasForeignKey<Corraloneros>(c => c.IdCorralonero);
 
+      // ==================================
+      // Relaciones de Siniestros
+      // ==================================
+
       // Relación 1 a 1 entre Siniestros y Asesores
       builder.Entity<Siniestros>()
           .HasOne(s => s.Asesor)
@@ -38,6 +46,27 @@ namespace ApiNet7WithJwtAndIdentity.Context
           .HasOne(s => s.Ubicacion)
           .WithOne(u => u.Siniestro)
           .HasForeignKey<Siniestros>(s => s.IdUbicacion);
+
+      // ==================================
+      // Relaciones de Corralones
+      // ==================================
+      // Relación 1 a 1 entre Corralones y Regiones
+      builder.Entity<Corralones>()
+          .HasOne(c => c.Region)
+          .WithOne(r => r.Corralon)
+          .HasForeignKey<Corralones>(c => c.IdRegion);
+
+      // Relación 1 a 1 entre Corralones y Ubicaciones
+      builder.Entity<Corralones>()
+          .HasOne(c => c.Ubicacion)
+          .WithOne(u => u.Corralon)
+          .HasForeignKey<Corralones>(c => c.IdUbicacion);
+
+      // Relación 1 a 1 entre Corralones y Corraloneros
+      builder.Entity<Corralones>()
+          .HasOne(c => c.Corralonero)
+          .WithOne(cr => cr.Corralon)
+          .HasForeignKey<Corralones>(c => c.IdCorralonero);
     }
 
     public DbSet<Ubicaciones> Ubicaciones { get; set; }
@@ -49,6 +78,7 @@ namespace ApiNet7WithJwtAndIdentity.Context
     public DbSet<Corraloneros> Corraloneros { get; set; }
 
     public DbSet<Siniestros> Siniestros { get; set; }
+    public DbSet<Corralones> Corralones { get; set; }
 
 
     public DbSet<Employee> Employees { get; set; }

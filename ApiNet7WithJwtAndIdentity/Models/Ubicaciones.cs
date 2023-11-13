@@ -44,7 +44,10 @@ namespace ApiNet7WithJwtAndIdentity.Models
     public int? NumeroInterior { get; set; }
 
 
-    // Agregado: Propiedad de navegación inversa para establecer la relación uno a uno con Siniestros
+    // Propiedad de navegación inversa para establecer la relación uno a uno con Siniestros
     public Siniestros Siniestro { get; set; }
+
+    // Propiedad de navegación inversa para establecer la relación uno a uno con Corralones
+    public Corralones Corralon { get; set; }
   }
 }
