@@ -39,11 +39,11 @@ namespace ApiNet7WithJwtAndIdentity.Context
           .WithMany(a => a.Siniestros)
           .HasForeignKey(s => s.IdAsesor);
 
-      // Relación 1 a 1 entre Siniestros y Ubicaciones
+      // Relación 1 a N entre Siniestros y Ubicaciones
       builder.Entity<Siniestros>()
           .HasOne(s => s.Ubicacion)
-          .WithOne(u => u.Siniestro)
-          .HasForeignKey<Siniestros>(s => s.IdUbicacion);
+          .WithMany(u => u.Siniestros)
+          .HasForeignKey(s => s.IdUbicacion);
 
       // ==================================
       // Relaciones de Corralones
@@ -125,8 +125,8 @@ namespace ApiNet7WithJwtAndIdentity.Context
     public DbSet<Corraloneros> Corraloneros { get; set; }
 
     public DbSet<Corralones> Corralones { get; set; }
-    public DbSet<Siniestros> Siniestros { get; set; }
     public DbSet<Gruas> Gruas { get; set; }
+    public DbSet<Siniestros> Siniestros { get; set; }
     public DbSet<Arrastres> Arrastres { get; set; }
   }
 }

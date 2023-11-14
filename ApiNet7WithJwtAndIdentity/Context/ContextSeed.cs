@@ -203,7 +203,7 @@ namespace ApiNet7WithJwtAndIdentity.Context
     }
 
     // Seed tablas dependientes
-    public static async Task SeedTableCorralonesAsync(UserManager<Usuarios> userManager, AuthIdentityDbContext context)
+    public static async Task SeedTableCorralonesAsync(AuthIdentityDbContext context)
     {
       if (!context.Corralones.Any())
       {
@@ -258,27 +258,25 @@ namespace ApiNet7WithJwtAndIdentity.Context
       }
     }
 
-    public static async Task SeedTableGruasAsync(UserManager<Usuarios> userManager, AuthIdentityDbContext context)
+    public static async Task SeedTableGruasAsync(AuthIdentityDbContext context)
     {
       if (!context.Gruas.Any())
       {
-        int IdCorralon = context.Regiones
-          .Where(r => r.IdRegion == 1)
-          .Select(r => r.IdRegion)
+        int idCorralon = context.Corralones
+          .Where(r => r.IdCorralon == 1)
+          .Select(r => r.IdCorralon)
           .FirstOrDefault();
 
-
-        // =================================
-        int idUbicacion2 = context.Ubicaciones
-          .Where(u => u.Calle == "Av. 4 Pte. 3311B")
-          .Select(r => r.IdUbicacion)
+        int idCorralon2 = context.Corralones
+          .Where(r => r.IdCorralon == 2)
+          .Select(r => r.IdCorralon)
           .FirstOrDefault();
 
 
         var gruas = new List<Gruas>
         {
           new Gruas {
-            IdCorralon = IdCorralon,
+            IdCorralon = idCorralon,
             IdTipoGrua = 1, // Tipo 'A'
             Matricula = "GGRRUU1",
             Color = "Gris",
@@ -286,7 +284,7 @@ namespace ApiNet7WithJwtAndIdentity.Context
             Modelo = "Model 1"
           },
           new Gruas {
-            IdCorralon = IdCorralon,
+            IdCorralon = idCorralon2,
             IdTipoGrua = 1, // Tipo 'A'
             Matricula = "GGRRUU2",
             Color = "Gris",
@@ -300,5 +298,41 @@ namespace ApiNet7WithJwtAndIdentity.Context
       }
     }
 
+    public static async Task SeedTableSiniestrosAsync(AuthIdentityDbContext context)
+    {
+      if (!context.Siniestros.Any())
+      {
+        string idAsesor = context.Asesores
+          .Where(r => r.Usuario.Email== "marianoperez@hotmail.com")
+          .Select(r => r.IdAsesor)
+          .FirstOrDefault();
+
+        int idUbicacion = context.Ubicaciones
+          .Where(u => u.Calle == "Ayala 440-438")
+          .Select(r => r.IdUbicacion)
+          .FirstOrDefault();
+
+        var siniestros = new List<Siniestros>
+        {
+          new Siniestros {
+            IdAsesor = idAsesor,
+            IdUbicacion = idUbicacion,
+            Folio = "AAAAAA1",
+            Detalles = "1 vehiculo accidentado",
+            Fecha = DateTime.UtcNow
+          },
+          new Siniestros {
+            IdAsesor = idAsesor,
+            IdUbicacion = idUbicacion,
+            Folio = "AAAAAA2",
+            Detalles = "1 vehiculo accidentado",
+            Fecha = DateTime.UtcNow
+          }
+        };
+
+        context.Siniestros.AddRange(siniestros);
+        await context.SaveChangesAsync();
+      }
+    }
   }
 }

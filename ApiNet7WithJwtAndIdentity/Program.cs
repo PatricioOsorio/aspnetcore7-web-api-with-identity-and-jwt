@@ -92,8 +92,10 @@ using (var scope = app.Services.CreateScope())
     await ContextSeed.SeedTableTipoGruasAsync(context);
     await ContextSeed.SeedTableVehiculosAsync(context);
     await ContextSeed.SeedTableUbicacionesAsync(context);
-    await ContextSeed.SeedTableCorralonesAsync(userManager,context);
-    await ContextSeed.SeedTableGruasAsync(userManager, context);
+    await ContextSeed.SeedTableCorralonesAsync(context);
+    await ContextSeed.SeedTableGruasAsync(context);
+    await ContextSeed.SeedTableSiniestrosAsync(context);
+
 
     //await ContextSeed.SeedUserStudentAsync(userManager, roleManager, context);
     //await ContextSeed.SeedUserOrganizacionesAsync(userManager, roleManager, context);
