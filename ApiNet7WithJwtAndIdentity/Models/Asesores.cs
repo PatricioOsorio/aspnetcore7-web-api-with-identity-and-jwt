@@ -14,7 +14,7 @@ namespace ApiNet7WithJwtAndIdentity.Models
     // Propiedad de navegación hacia el modelo Usuarios
     public Usuarios Usuario { get; set; }
 
-    // Propiedad de navegación inversa para establecer la relación uno a uno con Siniestros
-    public Siniestros Siniestro { get; set; }
+    // Propiedad de navegación para establecer la relación 1:N con Siniestros
+    public ICollection<Siniestros> Siniestros { get; set; }
   }
 }

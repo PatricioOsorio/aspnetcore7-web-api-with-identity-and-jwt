@@ -33,11 +33,11 @@ namespace ApiNet7WithJwtAndIdentity.Context
       // ==================================
       // Relaciones de Siniestros
       // ==================================
-      // Relación 1 a 1 entre Siniestros y Asesores
+      // Relación 1 a N entre Asesores y Siniestros
       builder.Entity<Siniestros>()
           .HasOne(s => s.Asesor)
-          .WithOne(a => a.Siniestro)
-          .HasForeignKey<Siniestros>(s => s.IdAsesor);
+          .WithMany(a => a.Siniestros)
+          .HasForeignKey(s => s.IdAsesor);
 
       // Relación 1 a 1 entre Siniestros y Ubicaciones
       builder.Entity<Siniestros>()

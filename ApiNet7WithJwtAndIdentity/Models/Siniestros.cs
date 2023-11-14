@@ -24,7 +24,7 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [Display(Name = "Detalles")]
     public string? Detalles { get; set; }
 
-    // Agregado: Propiedad de navegación hacia Asesores para la relación uno a uno
+    // Relación 1:N entre Asesores y Siniestros
     [ForeignKey(nameof(Asesor))]
     public string IdAsesor { get; set; }
     public Asesores Asesor { get; set; }

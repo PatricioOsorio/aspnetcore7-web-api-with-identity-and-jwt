@@ -43,7 +43,6 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [Display(Name = "Número Interior")]
     public int? NumeroInterior { get; set; }
 
-
     // Propiedad de navegación inversa para establecer la relación uno a uno con Siniestros
     public Siniestros Siniestro { get; set; }
 
