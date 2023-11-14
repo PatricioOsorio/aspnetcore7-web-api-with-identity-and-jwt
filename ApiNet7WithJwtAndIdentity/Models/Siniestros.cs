@@ -29,9 +29,12 @@ namespace ApiNet7WithJwtAndIdentity.Models
     public string IdAsesor { get; set; }
     public Asesores Asesor { get; set; }
 
-    // Agregado: Propiedad de navegación hacia Ubicaciones para la relación uno a uno
+    // Propiedad de navegación hacia Ubicaciones para la relación uno a uno
     [ForeignKey(nameof(Ubicacion))]
     public int IdUbicacion { get; set; }
     public Ubicaciones Ubicacion { get; set; }
+
+    // Relación 1:1 con Arrastres
+    public Arrastres Arrastre { get; set; }
   }
 }

@@ -28,5 +28,7 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [Display(Name = "Modelo")]
     public string? Modelo { get; set; }
 
+    // Relación 1:1 con Arrastres
+    public Arrastres Arrastre { get; set; }
   }
 }

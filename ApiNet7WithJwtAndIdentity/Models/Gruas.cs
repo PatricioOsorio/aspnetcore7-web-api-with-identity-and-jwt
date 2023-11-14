@@ -38,5 +38,8 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [ForeignKey(nameof(IdTipoGruas))]
     public TipoGruas TipoGruas { get; set; }
     public int IdTipoGruas { get; set; }
+
+    // Relación 1:1 con Arrastres
+    public Arrastres Arrastre { get; set; }
   }
 }

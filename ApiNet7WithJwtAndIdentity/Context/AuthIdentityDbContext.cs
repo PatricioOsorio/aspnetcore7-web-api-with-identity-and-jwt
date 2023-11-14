@@ -80,6 +80,40 @@ namespace ApiNet7WithJwtAndIdentity.Context
           .HasOne(g => g.TipoGruas)
           .WithOne(t => t.Gruas)
           .HasForeignKey<Gruas>(g => g.IdTipoGruas);
+
+      // ==================================
+      // Relaciones de Arrastres
+      // ==================================
+      builder.Entity<Arrastres>()
+              .HasKey(a => a.IdArrastre);
+
+      // Relación 1 a 1 entre Arrastres y Siniestros
+      builder.Entity<Arrastres>()
+          .HasOne(a => a.Siniestro)
+          .WithOne(s => s.Arrastre)
+          .HasForeignKey<Arrastres>(a => a.IdSiniestro)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
+
+      // Relación 1 a 1 entre Arrastres y Vehiculos
+      builder.Entity<Arrastres>()
+          .HasOne(a => a.Vehiculo)
+          .WithOne(v => v.Arrastre)
+          .HasForeignKey<Arrastres>(a => a.IdVehiculo)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
+
+      // Relación 1 a 1 entre Arrastres y Gruas
+      builder.Entity<Arrastres>()
+          .HasOne(a => a.Grua)
+          .WithOne(g => g.Arrastre)
+          .HasForeignKey<Arrastres>(a => a.IdGrua)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
+
+      // Relación 1 a 1 entre Arrastres y Corralones
+      builder.Entity<Arrastres>()
+          .HasOne(a => a.Corralon)
+          .WithOne(c => c.Arrastre)
+          .HasForeignKey<Arrastres>(a => a.IdCorralon)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
     }
 
     public DbSet<Ubicaciones> Ubicaciones { get; set; }
@@ -93,9 +127,6 @@ namespace ApiNet7WithJwtAndIdentity.Context
     public DbSet<Siniestros> Siniestros { get; set; }
     public DbSet<Corralones> Corralones { get; set; }
     public DbSet<Gruas> Gruas { get; set; }
-
-
-
-    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Arrastres> Arrastres { get; set; }
   }
 }
