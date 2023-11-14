@@ -240,7 +240,7 @@ namespace ApiNet7WithJwtAndIdentity.Context
             IdUbicacion = idUbicacion,
             IdCorralonero = idCorralonero,
             DiasActivo = "1010101",
-          Correo = "DefensoresCorralon@hotmail.com",
+            Correo = "DefensoresCorralon@hotmail.com",
             Telefono = "1111111111"
           },
           new Corralones {
@@ -254,6 +254,48 @@ namespace ApiNet7WithJwtAndIdentity.Context
         };
 
         context.Corralones.AddRange(corralones);
+        await context.SaveChangesAsync();
+      }
+    }
+
+    public static async Task SeedTableGruasAsync(UserManager<Usuarios> userManager, AuthIdentityDbContext context)
+    {
+      if (!context.Gruas.Any())
+      {
+        int IdCorralon = context.Regiones
+          .Where(r => r.IdRegion == 1)
+          .Select(r => r.IdRegion)
+          .FirstOrDefault();
+
+
+        // =================================
+        int idUbicacion2 = context.Ubicaciones
+          .Where(u => u.Calle == "Av. 4 Pte. 3311B")
+          .Select(r => r.IdUbicacion)
+          .FirstOrDefault();
+
+
+        var gruas = new List<Gruas>
+        {
+          new Gruas {
+            IdCorralon = IdCorralon,
+            IdTipoGrua = 1, // Tipo 'A'
+            Matricula = "GGRRUU1",
+            Color = "Gris",
+            Marca = "HIAB",
+            Modelo = "Model 1"
+          },
+          new Gruas {
+            IdCorralon = IdCorralon,
+            IdTipoGrua = 1, // Tipo 'A'
+            Matricula = "GGRRUU2",
+            Color = "Gris",
+            Marca = "HIAB",
+            Modelo = "Model 2"
+          },
+        };
+
+        context.Gruas.AddRange(gruas);
         await context.SaveChangesAsync();
       }
     }

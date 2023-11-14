@@ -7,14 +7,14 @@ namespace ApiNet7WithJwtAndIdentity.Models
   {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int IdTipoGruas { get; set; }
+    public int IdTipoGrua { get; set; }
 
     [Required]
     [Column(TypeName = "nvarchar(50)")]
     [Display(Name = "Tipo")]
     public string Tipo { get; set; }
 
-    // Relación 1:1 con Gruas
-    public Gruas Gruas { get; set; }
+    // Lista de Gruas para establecer la relación uno a muchos con Gruas
+    public ICollection<Gruas> Gruas { get; set; }
   }
 }

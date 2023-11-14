@@ -75,11 +75,11 @@ namespace ApiNet7WithJwtAndIdentity.Context
           .WithMany(c => c.Gruas)
           .HasForeignKey(g => g.IdCorralon);
 
-      // Relación 1:1 entre Gruas y TipoGruas
+      // Relación 1:N entre Gruas y TipoGruas
       builder.Entity<Gruas>()
-          .HasOne(g => g.TipoGruas)
-          .WithOne(t => t.Gruas)
-          .HasForeignKey<Gruas>(g => g.IdTipoGruas);
+          .HasOne(g => g.TipoGrua)
+          .WithMany(t => t.Gruas)
+          .HasForeignKey(g => g.IdTipoGrua);
 
       // ==================================
       // Relaciones de Arrastres

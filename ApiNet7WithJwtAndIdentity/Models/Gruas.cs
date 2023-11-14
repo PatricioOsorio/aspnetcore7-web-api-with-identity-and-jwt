@@ -34,10 +34,12 @@ namespace ApiNet7WithJwtAndIdentity.Models
     public Corralones Corralon { get; set; }
     public int IdCorralon { get; set; }
 
-    // Relación 1:1 con TipoGruas
-    [ForeignKey(nameof(IdTipoGruas))]
-    public TipoGruas TipoGruas { get; set; }
-    public int IdTipoGruas { get; set; }
+    // Relación 1:N con TipoGruas
+    [ForeignKey(nameof(IdTipoGrua))]
+    public TipoGruas TipoGrua { get; set; }
+    public int IdTipoGrua { get; set; }
+
+    //public ICollection<TipoGruas> TipoGruas { get; set; } // Agregar una lista de TipoGruas en Gruas para la relación inversa
 
     // Relación 1:1 con Arrastres
     public Arrastres Arrastre { get; set; }
