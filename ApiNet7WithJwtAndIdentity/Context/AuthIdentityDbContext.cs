@@ -48,23 +48,23 @@ namespace ApiNet7WithJwtAndIdentity.Context
       // ==================================
       // Relaciones de Corralones
       // ==================================
-      // Relación 1 a 1 entre Corralones y Regiones
+      // Relación 1 a N entre Corralones y Regiones
       builder.Entity<Corralones>()
           .HasOne(c => c.Region)
-          .WithOne(r => r.Corralon)
-          .HasForeignKey<Corralones>(c => c.IdRegion);
+          .WithMany(r => r.Corralones)
+          .HasForeignKey(c => c.IdRegion);
 
-      // Relación 1 a 1 entre Corralones y Ubicaciones
+      // Relación 1 a N entre Corralones y Ubicaciones
       builder.Entity<Corralones>()
           .HasOne(c => c.Ubicacion)
-          .WithOne(u => u.Corralon)
-          .HasForeignKey<Corralones>(c => c.IdUbicacion);
+          .WithMany(u => u.Corralones)
+          .HasForeignKey(c => c.IdUbicacion);
 
-      // Relación 1 a 1 entre Corralones y Corraloneros
+      // Relación 1 a N entre Corralones y Corraloneros
       builder.Entity<Corralones>()
           .HasOne(c => c.Corralonero)
-          .WithOne(cr => cr.Corralon)
-          .HasForeignKey<Corralones>(c => c.IdCorralonero);
+          .WithMany(cr => cr.Corralones)
+          .HasForeignKey(c => c.IdCorralonero);
 
       // ==================================
       // Relaciones de Gruas
@@ -116,16 +116,16 @@ namespace ApiNet7WithJwtAndIdentity.Context
           .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
     }
 
-    public DbSet<Ubicaciones> Ubicaciones { get; set; }
     public DbSet<Regiones> Regiones { get; set; }
     public DbSet<TipoGruas> TipoGruas { get; set; }
     public DbSet<Vehiculos> Vehiculos { get; set; }
+    public DbSet<Ubicaciones> Ubicaciones { get; set; }
 
     public DbSet<Asesores> Asesores { get; set; }
     public DbSet<Corraloneros> Corraloneros { get; set; }
 
-    public DbSet<Siniestros> Siniestros { get; set; }
     public DbSet<Corralones> Corralones { get; set; }
+    public DbSet<Siniestros> Siniestros { get; set; }
     public DbSet<Gruas> Gruas { get; set; }
     public DbSet<Arrastres> Arrastres { get; set; }
   }

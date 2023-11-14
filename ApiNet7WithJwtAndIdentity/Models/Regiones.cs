@@ -14,7 +14,7 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [Display(Name = "Nombre")]
     public string Nombre { get; set; }
 
-    // Propiedad de navegación inversa para establecer la relación uno a uno con Corralones
-    public Corralones Corralon { get; set; }
+    // Lista de Corralones para establecer la relación uno a muchos con Corralones
+    public ICollection<Corralones> Corralones { get; set; }
   }
 }

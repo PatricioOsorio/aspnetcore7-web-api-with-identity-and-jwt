@@ -27,15 +27,21 @@ namespace ApiNet7WithJwtAndIdentity.Models
     public Regiones Region { get; set; }
     public int IdRegion { get; set; }
 
+    public ICollection<Regiones> Regiones { get; set; } // Agregar una lista de Corralones en Regiones para la relación inversa
+
     // Relación 1 a 1 con Ubicaciones
     [ForeignKey(nameof(IdUbicacion))]
     public Ubicaciones Ubicacion { get; set; }
     public int IdUbicacion { get; set; }
 
+    public ICollection<Ubicaciones> Ubicaciones { get; set; } // Agregar una lista de Corralones en Ubicaciones para la relación inversa
+
     // Relación 1 a 1 con Corraloneros
     [ForeignKey(nameof(IdCorralonero))]
     public Corraloneros Corralonero { get; set; }
     public string IdCorralonero { get; set; }
+
+    public ICollection<Corraloneros> Corraloneros { get; set; } // Agregar una lista de Corralones en Corraloneros para la relación inversa
 
     // Relación 1:N con Gruas
     public ICollection<Gruas> Gruas { get; set; }

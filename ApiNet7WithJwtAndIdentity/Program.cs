@@ -72,6 +72,42 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// ContextSeed
+using (var scope = app.Services.CreateScope())
+{
+  var services = scope.ServiceProvider;
+  var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+  try
+  {
+    var context = services.GetRequiredService<AuthIdentityDbContext>();
+    var userManager = services.GetRequiredService<UserManager<Usuarios>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await ContextSeed.SeedRolesAsync(roleManager);
+
+    await ContextSeed.SeedUserAsesorAsync(userManager, context);
+    await ContextSeed.SeedUserCorraloneroAsync(userManager, context);
+    
+    await ContextSeed.SeedTableRegionesAsync(context);
+    await ContextSeed.SeedTableTipoGruasAsync(context);
+    await ContextSeed.SeedTableVehiculosAsync(context);
+    await ContextSeed.SeedTableUbicacionesAsync(context);
+    await ContextSeed.SeedTableCorralonesAsync(userManager,context);
+
+    //await ContextSeed.SeedUserStudentAsync(userManager, roleManager, context);
+    //await ContextSeed.SeedUserOrganizacionesAsync(userManager, roleManager, context);
+    //await ContextSeed.SeedUserCoordinadorPracticaEscuelaAsync(userManager, roleManager, context);
+    //await ContextSeed.SeedUserCoordinadorPracticaOrganizacionAsync(userManager, roleManager, context);
+    //await ContextSeed.SeedOportunidadPracticasAsync(userManager, roleManager, context);
+  }
+  catch (Exception ex)
+  {
+    var logger = loggerFactory.CreateLogger<Program>();
+    logger.LogError(ex, "An error occurred seeding the DB.");
+  }
+}
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
