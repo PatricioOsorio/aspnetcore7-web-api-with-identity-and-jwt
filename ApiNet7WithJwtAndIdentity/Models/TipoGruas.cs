@@ -13,5 +13,8 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [Column(TypeName = "nvarchar(50)")]
     [Display(Name = "Tipo")]
     public string Tipo { get; set; }
+
+    // Relación 1:1 con Gruas
+    public Gruas Gruas { get; set; }
   }
 }

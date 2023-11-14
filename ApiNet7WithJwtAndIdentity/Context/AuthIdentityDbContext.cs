@@ -18,7 +18,6 @@ namespace ApiNet7WithJwtAndIdentity.Context
       // ==================================
       // Relaciones de Usuarios
       // ==================================
-
       //Relación 1 a 1 entre Usuarios y Asesores
       builder.Entity<Asesores>()
        .HasOne(c => c.Usuario)
@@ -34,7 +33,6 @@ namespace ApiNet7WithJwtAndIdentity.Context
       // ==================================
       // Relaciones de Siniestros
       // ==================================
-
       // Relación 1 a 1 entre Siniestros y Asesores
       builder.Entity<Siniestros>()
           .HasOne(s => s.Asesor)
@@ -67,6 +65,21 @@ namespace ApiNet7WithJwtAndIdentity.Context
           .HasOne(c => c.Corralonero)
           .WithOne(cr => cr.Corralon)
           .HasForeignKey<Corralones>(c => c.IdCorralonero);
+
+      // ==================================
+      // Relaciones de Gruas
+      // ==================================
+      // Relación 1:N entre Corralones y Gruas
+      builder.Entity<Gruas>()
+          .HasOne(g => g.Corralon)
+          .WithMany(c => c.Gruas)
+          .HasForeignKey(g => g.IdCorralon);
+
+      // Relación 1:1 entre Gruas y TipoGruas
+      builder.Entity<Gruas>()
+          .HasOne(g => g.TipoGruas)
+          .WithOne(t => t.Gruas)
+          .HasForeignKey<Gruas>(g => g.IdTipoGruas);
     }
 
     public DbSet<Ubicaciones> Ubicaciones { get; set; }
@@ -79,6 +92,8 @@ namespace ApiNet7WithJwtAndIdentity.Context
 
     public DbSet<Siniestros> Siniestros { get; set; }
     public DbSet<Corralones> Corralones { get; set; }
+    public DbSet<Gruas> Gruas { get; set; }
+
 
 
     public DbSet<Employee> Employees { get; set; }

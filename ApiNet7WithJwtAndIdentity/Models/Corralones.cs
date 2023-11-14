@@ -36,5 +36,8 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [ForeignKey(nameof(IdCorralonero))]
     public Corraloneros Corralonero { get; set; }
     public string IdCorralonero { get; set; }
+
+    // Relación 1:N con Gruas
+    public ICollection<Gruas> Gruas { get; set; }
   }
 }
