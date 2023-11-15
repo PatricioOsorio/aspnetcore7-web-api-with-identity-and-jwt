@@ -95,13 +95,7 @@ using (var scope = app.Services.CreateScope())
     await ContextSeed.SeedTableCorralonesAsync(context);
     await ContextSeed.SeedTableGruasAsync(context);
     await ContextSeed.SeedTableSiniestrosAsync(context);
-
-
-    //await ContextSeed.SeedUserStudentAsync(userManager, roleManager, context);
-    //await ContextSeed.SeedUserOrganizacionesAsync(userManager, roleManager, context);
-    //await ContextSeed.SeedUserCoordinadorPracticaEscuelaAsync(userManager, roleManager, context);
-    //await ContextSeed.SeedUserCoordinadorPracticaOrganizacionAsync(userManager, roleManager, context);
-    //await ContextSeed.SeedOportunidadPracticasAsync(userManager, roleManager, context);
+    await ContextSeed.SeedTableArrastresAsync(context);
   }
   catch (Exception ex)
   {

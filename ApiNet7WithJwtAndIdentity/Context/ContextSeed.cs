@@ -303,7 +303,7 @@ namespace ApiNet7WithJwtAndIdentity.Context
       if (!context.Siniestros.Any())
       {
         string idAsesor = context.Asesores
-          .Where(r => r.Usuario.Email== "marianoperez@hotmail.com")
+          .Where(r => r.Usuario.Email == "marianoperez@hotmail.com")
           .Select(r => r.IdAsesor)
           .FirstOrDefault();
 
@@ -334,5 +334,64 @@ namespace ApiNet7WithJwtAndIdentity.Context
         await context.SaveChangesAsync();
       }
     }
+
+    public static async Task SeedTableArrastresAsync(AuthIdentityDbContext context)
+    {
+      if (!context.Arrastres.Any())
+      {
+        int idSiniestro = context.Siniestros
+          .Where(s => s.IdSiniestro == 1)
+          .Select(s => s.IdSiniestro)
+          .FirstOrDefault();
+
+        int idVehiculo = context.Vehiculos
+          .Where(v => v.Matricula == "AABBCC1")
+          .Select(v => v.IdVehiculo)
+          .FirstOrDefault();
+
+        int idVehiculo2 = context.Vehiculos
+          .Where(v => v.Matricula == "AABBCC2")
+          .Select(v => v.IdVehiculo)
+          .FirstOrDefault();
+
+        int idGrua = context.Gruas
+          .Where(g => g.Matricula == "GGRRUU1")
+          .Select(v => v.IdGrua)
+          .FirstOrDefault();
+
+        int idCorralon = context.Corralones
+          .Where(c => c.IdCorralon == 1)
+          .Select(c => c.IdCorralon)
+          .FirstOrDefault();
+
+        var arrastres = new List<Arrastres>
+        {
+          new Arrastres {
+            IdSiniestro = idSiniestro,
+            IdVehiculo = idVehiculo,
+            IdGrua = idGrua,
+            IdCorralon = idCorralon,
+            FechaEntrada = DateTime.UtcNow.AddDays(1),
+            KmRecorridos = 1.5f,
+            CostoPorArrastre = 500.00f,
+            CostoPorDia = 20.5f
+          },
+          new Arrastres {
+            IdSiniestro = idSiniestro,
+            IdVehiculo = idVehiculo2,
+            IdGrua = idGrua,
+            IdCorralon = idCorralon,
+            FechaEntrada = DateTime.UtcNow.AddDays(1).AddHours(1),
+            KmRecorridos = 1.5f,
+            CostoPorArrastre = 500.00f,
+            CostoPorDia = 26.5f
+          }
+        };
+
+        context.Arrastres.AddRange(arrastres);
+        await context.SaveChangesAsync();
+      }
+    }
+
   }
 }

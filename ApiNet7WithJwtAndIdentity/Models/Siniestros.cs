@@ -37,7 +37,7 @@ namespace ApiNet7WithJwtAndIdentity.Models
     public ICollection<Ubicaciones> Ubicaciones { get; set; } // Agregar una lista de Corralones en Ubicaciones para la relación inversa
 
 
-    // Relación 1:1 con Arrastres
-    public Arrastres Arrastre { get; set; }
+    // Relación 1:N con Arrastres
+    public ICollection<Arrastres> Arrastres { get; set; }
   }
 }

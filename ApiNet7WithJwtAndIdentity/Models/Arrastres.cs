@@ -30,25 +30,23 @@ namespace ApiNet7WithJwtAndIdentity.Models
     [Display(Name = "Costo por dia")]
     public float CostoPorDia { get; set; }
 
-    // Relación 1:1 con Siniestros
+    // Relación 1:N con Siniestros
     [ForeignKey(nameof(Siniestro))]
-    [Key]
     public int IdSiniestro { get; set; }
     public Siniestros Siniestro { get; set; }
 
-    // Relación 1:1 con Vehiculos
+    // Relación 1:N con Vehiculos
     [ForeignKey(nameof(Vehiculo))]
-    [Key]
     public int IdVehiculo { get; set; }
     public Vehiculos Vehiculo { get; set; }
 
-    // Relación 1:1 con Gruas
-    [ForeignKey(nameof(Gruas))]
+    // Relación 1:N con Gruas
+    [ForeignKey(nameof(Grua))]
     public int IdGrua { get; set; }
     public Gruas Grua { get; set; }
 
-    // Relación 1:1 con Corralones
-    [ForeignKey(nameof(Corralones))]
+    // Relación 1:N con Corralones
+    [ForeignKey(nameof(Corralon))]
     public int IdCorralon { get; set; }
     public Corralones Corralon { get; set; }
   }

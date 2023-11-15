@@ -84,36 +84,36 @@ namespace ApiNet7WithJwtAndIdentity.Context
       // ==================================
       // Relaciones de Arrastres
       // ==================================
-      builder.Entity<Arrastres>()
-              .HasKey(a => a.IdArrastre);
+      //builder.Entity<Arrastres>()
+      //        .HasKey(a => a.IdArrastre);
 
-      // Relación 1 a 1 entre Arrastres y Siniestros
+      // Relación 1:N entre Arrastres y Siniestros
       builder.Entity<Arrastres>()
           .HasOne(a => a.Siniestro)
-          .WithOne(s => s.Arrastre)
-          .HasForeignKey<Arrastres>(a => a.IdSiniestro)
-          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
+          .WithMany(s => s.Arrastres)
+          .HasForeignKey(a => a.IdSiniestro)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada;
 
-      // Relación 1 a 1 entre Arrastres y Vehiculos
+      // Relación 1:N entre Arrastres y Vehiculos
       builder.Entity<Arrastres>()
           .HasOne(a => a.Vehiculo)
-          .WithOne(v => v.Arrastre)
-          .HasForeignKey<Arrastres>(a => a.IdVehiculo)
-          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
+          .WithMany(v => v.Arrastres)
+          .HasForeignKey(a => a.IdVehiculo)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada;
 
-      // Relación 1 a 1 entre Arrastres y Gruas
+      // Relación 1:N entre Arrastres y Gruas
       builder.Entity<Arrastres>()
           .HasOne(a => a.Grua)
-          .WithOne(g => g.Arrastre)
-          .HasForeignKey<Arrastres>(a => a.IdGrua)
-          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
+          .WithMany(g => g.Arrastres)
+          .HasForeignKey(a => a.IdGrua)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada;
 
-      // Relación 1 a 1 entre Arrastres y Corralones
+      // Relación 1:N entre Arrastres y Corralones
       builder.Entity<Arrastres>()
           .HasOne(a => a.Corralon)
-          .WithOne(c => c.Arrastre)
-          .HasForeignKey<Arrastres>(a => a.IdCorralon)
-          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada
+          .WithMany(c => c.Arrastres)
+          .HasForeignKey(a => a.IdCorralon)
+          .OnDelete(DeleteBehavior.Restrict); // Evita la eliminacion en cascada;
     }
 
     public DbSet<Regiones> Regiones { get; set; }
